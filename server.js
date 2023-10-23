@@ -7,12 +7,13 @@ require('dotenv').config()
 const puerto = 7060
 
 // BD
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@${process.env.CLUSTER}.gxtyny0.mongodb.net/?retryWrites=true&w=majority`
+const uri = "mongodb+srv://pradi:sena123@testingapis.gxtyny0.mongodb.net/?retryWrites=true&w=majority"
+
 mongoose.connect(uri,
     { useNewUrlParser: true, useUnifiedTopology: true }
-).then(() => 
+).then(() =>
     console.log('Base de datos conectada correctamente'
-    )).catch(error => 
+    )).catch(error =>
         console.log('error al conectarse a la db:', error
     ))
 
