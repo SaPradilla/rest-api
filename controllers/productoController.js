@@ -53,8 +53,8 @@ const nuevoProducto = async(req,res,next)=>{
 
 const mostrarProductos = async(req,res,next)=>{
     try{
-        const clientes = await Productos.find({});
-        res.json(clientes)
+        const productos = await Productos.find({});
+        res.json(productos)
     }catch(error){
         console.log(`Hubo un error, ${error}`)
         next();
@@ -63,16 +63,16 @@ const mostrarProductos = async(req,res,next)=>{
 
 const mostrarProductoId = async(req,res,next)=>{
     try{
-        const cliente = await Productos.findById(req.params.id)
-        if(!cliente){
+        const producto = await Productos.findById(req.params.id)
+        if(!producto){
             res.json({
                 msg:'No existe el Producto'
             })
-            return next();
+            return next(); 
         }
         res.json({
-            msg:'Cliente visualizado con exito.',
-            Cliente:cliente
+            msg:'Producto visualizado con exito.',
+            Producto:producto
         })
     }catch(error){
         console.log(`Hubo un error, ${error}`)
@@ -85,6 +85,7 @@ const actualizarProducto = async(req,res,next)=>{
         let  nuevoProducto = req.body
         if(req.file){
             nuevoProducto.imagen = req.file.filename;
+            console.log('se ejecuto')
         }else{
             let productoAnterior = await Productos.findById(req.params.id)
             nuevoProducto.imagen = productoAnterior.imagen

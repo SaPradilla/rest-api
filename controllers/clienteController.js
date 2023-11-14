@@ -10,7 +10,7 @@ const nuevoCliente = async(req,res,next)=>{
         })
     }catch(error){  
         // en caso de error
-        console.log(error);
+        res.json(error);
         next();
     }
 }
@@ -20,6 +20,7 @@ const mostrarClientes = async(req,res,next)=>{
         const clientes = await Clientes.find({});
         res.json(clientes)
     }catch(error){
+        res.json(error);
         console.log(`Hubo un error, ${error}`)
         next();
     }
@@ -39,6 +40,7 @@ const mostrarClienteId = async(req,res,next)=>{
             next();
         }
     }catch(error){
+        res.json(error);
         console.log(`Hubo un error, ${error}`)
         next();
     }
@@ -56,6 +58,7 @@ const actualizarCliente = async(req,res,next)=>{
             Cliente:editCliente
         })
     }catch(error){
+        res.json(error);
         console.log(`Hubo un error, ${error}`)
         next();
     }
@@ -69,6 +72,7 @@ const eliminarCliente = async(req,res,next)=>{
             })
         
     }catch(error){
+        res.json(error);
         console.log(`Hubo un error, ${error}`)
         next();
     }

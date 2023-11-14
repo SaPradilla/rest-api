@@ -6,7 +6,7 @@ const nuevoPedido = async (req,res,next)=>{
         await nuevoPedido.save();
         res.json({
             msg:'Pedido registrado con exito',
-            pedido:nuevoPedido
+            Pedido:nuevoPedido
         })
     }catch(error){
         console.log(`Hubo un error, ${error}`)
