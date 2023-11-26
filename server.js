@@ -5,7 +5,7 @@
     const app = express()
     const route = require('./routes')
     require('dotenv').config()
-    const puerto = 7060
+    const puerto = process.env.PORT 
     
 
     const uri = "mongodb://mongo:Dcf26fCgFFaC2HEe4gbDAF2-a-B5-da4@viaduct.proxy.rlwy.net:26076";
