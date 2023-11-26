@@ -17,6 +17,7 @@ cloudinary.config({
 const fileStorage = multer.memoryStorage();
 
 // Metodo para subir la imagen con la configuracion
+
 const upload = multer({
     storage: fileStorage,
     // Detecta si la imagen tiene la extensión correcta
@@ -27,6 +28,6 @@ const upload = multer({
             cb(new Error('Formato No Válido'));
         }
     },
-}).single('foto');
+}).single('imagen');
 
 module.exports = { upload }

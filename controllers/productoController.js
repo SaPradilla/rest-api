@@ -6,7 +6,9 @@ const cloudinary = require('cloudinary').v2;
 const subirArchivo = (req,res,next) => {
     console.log('Buffer de la imagen:', req.file.buffer);
     // Subir la imagen a Cloudinary
-    cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
+    cloudinary.uploader.upload_stream(
+        { resource_type: 'auto', folder: 'tienda-react' },
+        (error, result) => {
         if (error) {
           return next(new Error('Error al subir la imagen a Cloudinary'));
         }
@@ -20,7 +22,7 @@ const subirArchivo = (req,res,next) => {
 
 const nuevoProducto = async(req,res,next)=>{
     const {nombre,precio} = req.body
-    
+
     const nuevoProducto = new Productos({ 
         nombre,
         precio,
