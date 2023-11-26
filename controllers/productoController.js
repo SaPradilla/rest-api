@@ -1,45 +1,36 @@
 const multer = require('multer');
 const Productos = require('../models/Productos');
 const shortid = require('shortid');
+const cloudinary = require('cloudinary').v2;
 
-const configuracionMulter= {
-    storage:fileStorage = multer.diskStorage({
-        destination:(req,file, cb)=>{
-            cb(null,__dirname+'../../uploads')
-        },
-        filename:(req,file,cb)=>{
-            const extension = file.mimetype.split('/')[1];
-            cb(null,`${shortid.generate()}.${extension}`);
+const subirArchivo = (req,res,next) => {
+    console.log('Buffer de la imagen:', req.file.buffer);
+    // Subir la imagen a Cloudinary
+    cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
+        if (error) {
+          return next(new Error('Error al subir la imagen a Cloudinary'));
         }
-    }),
-    fileFilter(req,file,cb){
-        if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-            cb(null,true)
-        }else{
-            cb(new Error('Formato No Válido'))
-        }
-    }
-}
-const upload = multer(configuracionMulter).single('imagen')
-
-const subirArchivo = (req,res,next)=>{
-    upload(req,res,function(error){
-        if(error){
-            res.json({msg:error})
-        }
-        return next()
-    })
+        // Almacenar la URL de la imagen en req para que puedas usarla más adelante
+        req.imageUrl = result.secure_url;
+        next();
+        
+    }).end(req.file.buffer);
 }
 
 
 const nuevoProducto = async(req,res,next)=>{
-    const nuevoProducto = new Productos(req.body);
+    const {nombre,precio} = req.body
+    
+    const nuevoProducto = new Productos({ 
+        nombre,
+        precio,
+        imagen: req.imageUrl
+    });
+
     try{
-        if(req.file.filename){
-            nuevoProducto.imagen = req.file.filename
-        }
         // Guarda el registro en la base de datos
         await nuevoProducto.save();
+
         res.status(200).json({
             msg:'Producto creado correctamente.',
             Producto:nuevoProducto
