@@ -54,21 +54,21 @@ const mostrarPedido = async(req,res,next)=>{
 
 const actualizarPedido = async(req,res,next)=>{
     console.log(req.body.pedido)
-    
-    // try{
-    //     const pedido = await Pedidos.findById(req.params.id).populate('cliente').populate({
-    //         path:'pedido.producto',
-    //         model:'Productos'
-    //     });
+    try{
+        const pedido = await Pedidos.findById(req.params.id).populate('cliente').populate({
+            path:'pedido.producto',
+            model:'Productos'
+        });
 
-    //     res.json({
-    //         msg:'Pedido actualizado con exito',
-    //         editPedido:editPedido
-    //     })
-    // }catch(error){
-    //     console.log(`Hubo un error, ${error}`)
-    //     next();
-    // }
+        res.json({
+            msg:'Pedido actualizado con exito',
+            editPedido:pedido
+        })
+
+    }catch(error){
+        console.log(`Hubo un error, ${error}`)
+        next();
+    }
 }
 const eliminarPedido = async(req,res,next)=>{
     try{
