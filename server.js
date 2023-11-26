@@ -7,15 +7,7 @@
     require('dotenv').config()
     const puerto = 7060
     
-    const uri = "mongodb://mongo:Dcf26fCgFFaC2HEe4gbDAF2-a-B5-da4@viaduct.proxy.rlwy.net:26076";
-    // // BD
-    // mongoose.set('strictQuery',true)
-    // mongoose.Promise = global.Promise
-    // mongoose.connect('mongodb://0.0.0.0:27017/restapi',{
-    //     useNewUrlParser:true
-    // })
-    // const uri = "mongodb+srv://pradi4:sena123@forapis.ymzwneg.mongodb.net/api_clientes?retryWrites=true&w=majority"
-    
+    const uri = "mongodb+srv://pradi4:sena123@forapis.ymzwneg.mongodb.net/?retryWrites=true&w=majority";
     mongoose.connect(uri,
         { useNewUrlParser: true, useUnifiedTopology: true }
     )
