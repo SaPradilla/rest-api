@@ -51,25 +51,30 @@ const mostrarPedido = async(req,res,next)=>{
         next();
     }
 }
+const actualizarPedido = async (req, res, next) => {
+    try {
+        const editPedido = await Pedidos.findOneAndUpdate(
+            { _id: req.params.id },
+            req.body,
+            { new: true }
+        )
 
-const actualizarPedido = async(req,res,next)=>{
-    console.log(req.body.pedido)
-    try{
-        const pedido = await Pedidos.findById(req.params.id).populate('cliente').populate({
-            path:'pedido.producto',
-            model:'Productos'
-        });
+        if (!editPedido) {
+            return res.json({
+                msg: 'No se encontró el pedido'
+            })
+        }
 
         res.json({
-            msg:'Pedido actualizado con exito',
-            editPedido:pedido
+            msg: 'Pedido actualizado con éxito',
+            editPedido: editPedido
         })
-
-    }catch(error){
-        console.log(`Hubo un error, ${error}`)
-        next();
+    } catch (error) {
+        console.log(`Hubo un error: ${error}`)
+        next(error)
     }
-}
+};
+
 const eliminarPedido = async(req,res,next)=>{
     try{
         await Pedidos.findOneAndDelete({_id:req.params.id})
