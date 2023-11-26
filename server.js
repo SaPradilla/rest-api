@@ -15,10 +15,10 @@
 
     db.on("error",console.error.bind(console,"conection failed: "))
     db.once("open", function () {
-        console.log("Connect to the database successfully")
+        console.log("Connectado melo")
     })
    
-    
+
     // server
     app.listen(puerto, () =>{
         console.log(`Te has conectado a http://localhost:${puerto}`)
