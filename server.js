@@ -32,4 +32,4 @@
 
     app.use(cors())
     // rutas
-    app.use('/',route)
+    app.use('/api',route)
