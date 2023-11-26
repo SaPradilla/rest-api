@@ -7,7 +7,7 @@
     require('dotenv').config()
     const puerto = 7060
     
-    const uri = "mongodb+srv://pradi4:sena123@forapis.ymzwneg.mongodb.net/?retryWrites=true&w=majority";
+    const uri = "mongodb://mongo:Dcf26fCgFFaC2HEe4gbDAF2-a-B5-da4@viaduct.proxy.rlwy.net:26076";
     mongoose.connect(uri,
         { useNewUrlParser: true, useUnifiedTopology: true }
     )
