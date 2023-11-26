@@ -75,10 +75,13 @@ const mostrarProductoId = async(req,res,next)=>{
 
 const actualizarProducto = async(req,res,next)=>{
     try{
+
         let  nuevoProducto = req.body
+
         if(req.file){
-            nuevoProducto.imagen = req.file.filename;
+            nuevoProducto.imagen =  req.imageUrl
             console.log('se ejecuto')
+
         }else{
             let productoAnterior = await Productos.findById(req.params.id)
             nuevoProducto.imagen = productoAnterior.imagen
@@ -89,7 +92,7 @@ const actualizarProducto = async(req,res,next)=>{
             }
         );
         res.json({
-            msg:'editado correctamente',    
+            msg:'Producto editado correctamente',    
             Producto: editProducto
         })
     }catch(error){
