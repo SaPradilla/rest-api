@@ -7,7 +7,7 @@
     require('dotenv').config()
     const puerto = 7060
     
-    
+
     const uri = "mongodb://mongo:Dcf26fCgFFaC2HEe4gbDAF2-a-B5-da4@viaduct.proxy.rlwy.net:26076";
     mongoose.connect(uri,
         { useNewUrlParser: true, useUnifiedTopology: true }
@@ -22,12 +22,10 @@
 
     app.use(cors())
 
-
-    // server
-    app.listen(puerto, () =>{
-        console.log(`Te has conectado a http://localhost:${puerto}`)
+    //Server
+    app.listen(puerto, function(){
+        console.log(`Conectado a localhost:${puerto}`)
     })
-
     // capturar body
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true}))
